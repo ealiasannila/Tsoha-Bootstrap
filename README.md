@@ -2,7 +2,7 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://github.com/ealiasannila/Tsoha-Bootstrap)
+* [Linkki sovellukseeni](http://eannila.users.cs.helsinki.fi/foorumi/)
 * [Linkki dokumentaatiooni](https://github.com/ealiasannila/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
