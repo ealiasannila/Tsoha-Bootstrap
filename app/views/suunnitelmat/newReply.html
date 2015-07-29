@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h3><a>Foorumi</a> >> <a>Kahvipöytäkeskustelu</a> </h3> 
+<h2><a> Parempaa kahvia uudella vai vanhalla moccamasterilla?</a></h2>
+<h1>Uusi vastaus</h1>
+
+<form>
+
+    <div class="form-group">
+        <label>Viesti</label>
+        <textarea rows="10" class="form-control">Ihan sama, mutta uus on oranssi!</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lähetä</button>
+    <button type="submit" class="btn btn-danger">Peruuta</button>
+
+</form>
+
+<br>
+<div>
+    <table class="table table-bordered">
+        <tr class="success h3">
+            <td>Kirjoittaja</td>
+            <td>Viesti</td>
+        </tr>
+        <tr>
+            <td>Ville viimeisin</td>
+            <td>No vanhalla tietty.</td>
+        </tr>
+        <tr>
+            <td>Allu aloittaja</td>
+            <td>Nii että maistaako jengi eroa?</td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
