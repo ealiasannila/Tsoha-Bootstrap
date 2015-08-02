@@ -4,6 +4,7 @@ Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://eannila.users.cs.helsinki.fi/foorumi/)
 * [Linkki dokumentaatiooni](https://github.com/ealiasannila/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
+* [Linkki tietokantayhteyteen] (http://eannila.users.cs.helsinki.fi/foorumi/tietokantayhteys)
 
 ## Työn aihe
 
@@ -17,4 +18,5 @@ Yleisiä linkkejä:
 * [uusi keskusteluaihe](http://eannila.users.cs.helsinki.fi/foorumi/newtopic)
 * [uusi vastaus] (http://eannila.users.cs.helsinki.fi/foorumi/topic/reply)
 * [aihe] (http://eannila.users.cs.helsinki.fi/foorumi/topic)
-* [käyttäjän profiili] ((http://eannila.users.cs.helsinki.fi/foorumi/user))
+* [käyttäjän profiili] (http://eannila.users.cs.helsinki.fi/foorumi/user)
+
