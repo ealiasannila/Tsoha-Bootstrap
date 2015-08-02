@@ -15,4 +15,6 @@ Yleisiä linkkejä:
 * [sisäänkirjautuminen](http://eannila.users.cs.helsinki.fi/foorumi/login)
 * [rekisteröityminen](http://eannila.users.cs.helsinki.fi/foorumi/register)
 * [uusi keskusteluaihe](http://eannila.users.cs.helsinki.fi/foorumi/newtopic)
-* [uusi vastaus] (http://eannila.users.cs.helsinki.fi/foorumi/newtopic/reply)
+* [uusi vastaus] (http://eannila.users.cs.helsinki.fi/foorumi/topic/reply)
+* [aihe] (http://eannila.users.cs.helsinki.fi/foorumi/topic)
+* [käyttäjän profiili] ((http://eannila.users.cs.helsinki.fi/foorumi/user))

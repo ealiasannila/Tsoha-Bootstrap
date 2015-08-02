@@ -31,5 +31,11 @@ class HelloWorldController extends BaseController {
     public static function forum() {
         View::make('suunnitelmat/forum.html');
     }
+    public static function topic() {
+        View::make('suunnitelmat/topic.html');
+    }
+    public static function user() {
+        View::make('suunnitelmat/user.html');
+    }
 
 }

@@ -17,7 +17,7 @@
   $routes->get('/newtopic', function() {
     HelloWorldController::newTopic();
   });
-  $routes->get('/newtopic/reply', function() {
+  $routes->get('/topic/reply', function() {
     HelloWorldController::newReply();
   });
   $routes->get('/subforum', function() {
@@ -26,3 +26,11 @@
   $routes->get('/forum', function() {
     HelloWorldController::forum();
   });
+  
+  $routes->get('/topic', function() {
+    HelloWorldController::topic();
+  });
+  $routes->get('/user', function() {
+    HelloWorldController::user();
+  });
+
