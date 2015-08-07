@@ -3,20 +3,27 @@
 Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://eannila.users.cs.helsinki.fi/foorumi/)
+Sovelluksen eri osiin pääsee seuraamalla foorumin linkkejä, aivan kaikki linkit eivät vielä toimi, mutta suurin osa johtaa johonkin järkevään paikkaan. Aiheiden ja vastausten lähettäminen onnistuu.
+
 * [Linkki dokumentaatiooni](https://github.com/ealiasannila/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 * [Linkki tietokantayhteyteen] (http://eannila.users.cs.helsinki.fi/foorumi/tietokantayhteys)
 
-## Työn aihe
+## Työn aihe:
 
 [Keskustelufoorumi](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Keskustelufoorumi.html) 
 
-## linkit näkymien html versioihin:
-* [foorumin etusivu] (http://eannila.users.cs.helsinki.fi/foorumi/forum)
-* [aihealue] (http://eannila.users.cs.helsinki.fi/foorumi/subforum)
-* [sisäänkirjautuminen](http://eannila.users.cs.helsinki.fi/foorumi/login)
-* [rekisteröityminen](http://eannila.users.cs.helsinki.fi/foorumi/register)
-* [uusi keskusteluaihe](http://eannila.users.cs.helsinki.fi/foorumi/newtopic)
-* [uusi vastaus] (http://eannila.users.cs.helsinki.fi/foorumi/topic/reply)
-* [aihe] (http://eannila.users.cs.helsinki.fi/foorumi/topic)
-* [käyttäjän profiili] (http://eannila.users.cs.helsinki.fi/foorumi/user)
 
+
+##Todo:
+
+* vastausta lisättäessä vastaukset uusimmasta vanhimpaan
+* aihealueiden lisäysnäkymä
+
+* rekisteröityminen
+* kirjautuminen
+
+* käyttäjän viestien lukemisen tarkkailu
+* aihealueiden näyttäminen käyttäjän ryhmien mukaan
+* käyttäjäryhmien hallinta
+
+* näkymien hiontaa
