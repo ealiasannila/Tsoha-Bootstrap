@@ -20,7 +20,8 @@ CREATE TABLE Aihe(
 CREATE TABLE Kayttaja(
     id SERIAL PRIMARY KEY,
     kayttajatunnus varchar(50) NOT NULL,
-    salasana varchar(50) NOT NULL
+    salasana varchar(50) NOT NULL,
+    liittynyt TIMESTAMP DEFAULT NOW() NOT NULL
 );
 
 
@@ -28,7 +29,7 @@ CREATE TABLE Vastaus(
     id SERIAL PRIMARY KEY,
     otsikko varchar(100) NOT NULL,
     teksti varchar(100) NOT NULL,
-    julkaistu TIMESTAMP,
+    julkaistu TIMESTAMP DEFAULT NOW() NOT NULL,
     laatija INTEGER REFERENCES Kayttaja(id) ON UPDATE cascade NOT NULL,
     aihe INTEGER REFERENCES Aihe(id) ON DELETE cascade ON UPDATE cascade NOT NULL
 );

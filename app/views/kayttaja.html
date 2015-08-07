@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %} 
+<h2>{{kayttaja.kayttajatunnus}}</h2>
+<p class="t">Liittynyt {{kayttaja.liittynyt}}</p>
+<p class="t">Viestejä {{kayttaja.vastauksienMaara()}} </p>
+<p> Kuuluu ryhmiin:</p>
+
+<ul>
+    {% for kayttajaryhma in kayttaja.kayttajaryhmat %}
+    <li>{{kayttajaryhma.kuvaus}}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -20,17 +20,17 @@
   $routes->get('/topic/reply', function() {
     HelloWorldController::newReply();
   });
-  $routes->get('/subforum', function() {
-    HelloWorldController::subForum();
+  $routes->get('/aihealue', function() {
+      AihealueController::listaa();
   });
-  $routes->get('/forum', function() {
-    HelloWorldController::forum();
+  $routes->get('/foorumi', function() {
+      FoorumiController::listaa();
   });
   
-  $routes->get('/topic', function() {
-    HelloWorldController::topic();
+  $routes->get('/aihe', function() {
+      AiheController::listaa();
   });
-  $routes->get('/user', function() {
-    HelloWorldController::user();
+  $routes->get('/kayttaja', function() {
+      KayttajaController::listaa();
   });
 

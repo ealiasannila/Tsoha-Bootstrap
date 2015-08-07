@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h4><a>{{aihe.aihealueenOtsikko()}}</a> </h4> 
+<h2><a> {{aihe.vastaukset()[0].otsikko}}</a></h2>
+<div>
+    <table class="table table-bordered">
+        <tr class="success h3">
+            <td>Kirjoittaja</td>
+            <td>Viesti</td>
+            <td>Lähetetty</td>
+        </tr>
+
+
+        {% for vastaus in aihe.vastaukset() %}
+        <tr>
+            <td>{{vastaus.laatijanNimi()}}</td>
+            <td>{{vastaus.teksti}}</td>
+            <td>Lähetetty {{vastaus.julkaistu}}</td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+</div>
+{% endblock %}

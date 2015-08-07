@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{aihealue.otsikko}}</h2>
+<h2 class="small">{{aihealue.kuvaus}}</h2>
+<h2 class="small">Nakyy ryhmille: {% for ryhma in aihealue.kayttajaryhmat() %}{{ryhma.kuvaus}}, {% endfor %}</h2>
+
+<div>
+    <table class="table table-bordered">
+        <tr class="success h3">
+            <td>Aiheet</td>
+            <td>Aloittaja</td>
+            <td>Vastaukset</td>
+            <td>Uusin Viesti</td>
+        </tr>
+        {% for aihe in aihealue.aiheet() %}
+        <tr>
+            <td><a>{{aihe.vastaukset[0].otsikko}}</a></td>
+            <td><a>{{aihe.vastaukset[0].laatijanNimi()}}</a></td>
+            <td>{{aihe.vastauksienMaara()}}</td>
+            <td><a>Viimeisin viesti <br>{{aihe.viimeisinViesti().julkaistu}}<br> käyttäjältä {{aihe.viimeisinViesti().laatija}}</a></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

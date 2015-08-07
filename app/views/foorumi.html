@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %} 
+<h2>Foorumi</h2>
+
+<div>
+    <table class="table table-bordered">
+        <tr class="success h3">
+            <td>Keskustelualue</td>
+            <td>Aiheet</td>
+            <td>Viestit</td>
+            <td>Uusin Viesti</td>
+        </tr>
+        {% for aihealue in aihealueet %}
+        <tr>
+            <td><a>{{aihealue.otsikko}}</a><br> <p class="small"> {{aihealue.kuvaus}}</p></td>
+            <td>{{aihealue.aiheidenMaara()}}</td>
+            <td>{{aihealue.viestienMaara()}}</td>
+            <td><a>{{aihealue.viimeisinViesti().julkaistu}} </a> <br> käyttäjältä <br> <a> {{aihealue.viimeisinViesti().laatijanNimi()}} </a></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
