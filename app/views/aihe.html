@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<h4><a>{{aihe.aihealueenOtsikko()}}</a> </h4> 
-<h2><a> {{aihe.vastaukset()[0].otsikko}}</a></h2>
+<h4><a href="{{base_path}}/aihealue/{{aihe.aihealue}}">{{aihe.aihealueenOtsikko()}}</a> </h4> 
+<h2> {{aihe.vastaukset()[0].otsikko}}</h2>
 <div>
     <table class="table table-bordered">
         <tr class="success h3">
@@ -13,12 +13,14 @@
 
         {% for vastaus in aihe.vastaukset() %}
         <tr>
-            <td>{{vastaus.laatijanNimi()}}</td>
+            <td><a href="{{base_path}}/kayttaja/{{vastaus.laatija}}">{{vastaus.laatijanNimi()}}</a></td>
             <td>{{vastaus.teksti}}</td>
             <td>Lähetetty {{vastaus.julkaistu}}</td>
         </tr>
         {% endfor %}
         
     </table>
+    
+    <a href="{{base_path}}/aihe/{{aihe.id}}/vastaus"><button class="btn btn-primary">Vastaa</button></a>
 </div>
 {% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<h4><a href="{{base_path}}/aihealue/{{aihe.aihealue}}">{{aihe.aihealueenOtsikko()}}</a> </h4> 
+<h2><a href="{{base_path}}/aihe/{{aihe.id}}"> {{aihe.vastaukset()[0].otsikko}}</a></h2>
+
+<form method="post" action="{{base_path}}/aihe/{{aihe.id}}/vastaus">
+
+    <div class="form-group">
+        <label>Uusi viesti</label>
+        <textarea name="teksti" rows="10" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lähetä</button>
+    <a href="{{base_path}}/aihe/{{aihe.id}}"><button type="submit" class="btn btn-danger">Peruuta</button></a>
+
+</form>
+
+<br>
+<div>
+    <table class="table table-bordered">
+        <tr class="success h3">
+            <td>Kirjoittaja</td>
+            <td>Viesti</td>
+            <td>Lahetetty</td>
+            
+        </tr>
+        {% for vastaus in aihe.vastaukset() %}
+        <tr>
+            <td><a href="{{base_path}}/kayttaja/{{vastaus.laatija}}">{{vastaus.laatijanNimi}}</a></td>
+            <td>{{vastaus.teksti}}</td>
+            <td>{{vastaus.julkaistu}}</td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+</div>
+{% endblock %}

@@ -24,7 +24,7 @@ class Aihe extends BaseModel {
         return $aihealue->otsikko;
     }
 
-    public function viimeiinViesti() {
+    public function viimeisinViesti() {
         $vastaukset = $this->vastaukset();
         return $vastaukset[count($vastaukset) - 1];
     }

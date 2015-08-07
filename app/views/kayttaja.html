@@ -7,7 +7,7 @@
 
 <ul>
     {% for kayttajaryhma in kayttaja.kayttajaryhmat %}
-    <li>{{kayttajaryhma.kuvaus}}</li>
+    <li><a href="{{base_path}}/kayttajaryhma/{{kayttajaryhma.id}}"> {{kayttajaryhma.kuvaus}}</a></li>
     {% endfor %}
 </ul>
 

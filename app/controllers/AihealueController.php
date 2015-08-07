@@ -13,9 +13,9 @@
  */
 class AihealueController {
 
-    public static function listaa() {
+    public static function listaa($id) {
 
-        $aihealue = Aihealue::haeYksi(1);
+        $aihealue = Aihealue::haeYksi($id);
         View::make('aihealue.html', array('aihealue' => $aihealue));
     }
 

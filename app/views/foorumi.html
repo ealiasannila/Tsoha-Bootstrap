@@ -12,13 +12,15 @@
         </tr>
         {% for aihealue in aihealueet %}
         <tr>
-            <td><a>{{aihealue.otsikko}}</a><br> <p class="small"> {{aihealue.kuvaus}}</p></td>
+            <td><a href ="{{base_path}}/aihealue/{{aihealue.id}}">{{aihealue.otsikko}}</a><br> <p class="small"> {{aihealue.kuvaus}}</p></td>
             <td>{{aihealue.aiheidenMaara()}}</td>
             <td>{{aihealue.viestienMaara()}}</td>
-            <td><a>{{aihealue.viimeisinViesti().julkaistu}} </a> <br> käyttäjältä <br> <a> {{aihealue.viimeisinViesti().laatijanNimi()}} </a></td>
+            <td><a href="{{base_path}}/aihe/{{aihealue.viimeisinViesti().aihe}}">{{aihealue.viimeisinViesti().julkaistu}} </a> <br> käyttäjältä <br> <a href="{{base_path}}/kayttaja/{{aihealue.viimeisinViesti().laatija}}"> {{aihealue.viimeisinViesti().laatijanNimi()}} </a></td>
 
         </tr>
         {% endfor %}
     </table>
+    <a href="{{base_path}}/uusiaihealue"><button class="btn btn-primary">Uusi aihealue</button></a>
+
 </div>
 {% endblock %}

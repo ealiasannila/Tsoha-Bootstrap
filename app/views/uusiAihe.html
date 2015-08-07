@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h4><a href="{{base_url}}/aihealue/{{aihealue.id}}">{{aihealue.otsikko}}</a> </h4> 
+<h2>Luo uusi keskusteluaihe</h2>
+
+<form method="post" action="{{base_path}}/aihealue/{{aihealue.id}}/uusiaihe">
+    <div class="form-group">
+        <label>Otsikko</label>
+        <input name="otsikko" class="form-control" type="text">
+    </div>
+
+    <div class="form-group">
+        <label>Viesti</label>
+        <textarea name="teksti" rows="10" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lähetä</button>
+    <a href="{{base_path}}/aihealue/{{aihealue.id}}"<button type="submit" class="btn btn-danger">Peruuta</button></a>
+
+</form>
+{% endblock %}

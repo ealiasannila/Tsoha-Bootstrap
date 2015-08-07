@@ -1,9 +1,5 @@
 <?php
 
-  $routes->get('/', function() {
-    HelloWorldController::index();
-  });
-
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
   });
@@ -14,23 +10,32 @@
   $routes->get('/register', function() {
     HelloWorldController::register();
   });
-  $routes->get('/newtopic', function() {
-    HelloWorldController::newTopic();
+  
+  $routes->get('/aihealue/:id/uusiaihe', function($id) {
+      UusiAiheController::listaa($id);
   });
-  $routes->get('/topic/reply', function() {
-    HelloWorldController::newReply();
+  $routes->post('/aihealue/:id/uusiaihe', function($id) {
+      UusiAiheController::lisaaAihe($id);
   });
-  $routes->get('/aihealue', function() {
-      AihealueController::listaa();
+  
+  $routes->get('/aihe/:id/vastaus', function($id) {
+      UusiVastausController::listaa($id);
   });
-  $routes->get('/foorumi', function() {
+  $routes->post('/aihe/:id/vastaus', function($id) {
+      UusiVastausController::lisaaVastaus($id);
+  });
+  
+  $routes->get('/aihealue/:id', function($id) {
+      AihealueController::listaa($id);
+  });
+  $routes->get('/', function() {
       FoorumiController::listaa();
   });
   
-  $routes->get('/aihe', function() {
-      AiheController::listaa();
+  $routes->get('/aihe/:id', function($id) {
+      AiheController::listaa($id);
   });
-  $routes->get('/kayttaja', function() {
-      KayttajaController::listaa();
+  $routes->get('/kayttaja/:id', function($id) {
+      KayttajaController::listaa($id);
   });
 

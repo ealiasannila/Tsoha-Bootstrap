@@ -13,9 +13,9 @@
  */
 class KayttajaController {
 
-    public static function listaa() {
+    public static function listaa($id) {
 
-        $kayttaja = Kayttaja::haeYksi(1);
+        $kayttaja = Kayttaja::haeYksi($id);
         View::make('kayttaja.html', array('kayttaja' => $kayttaja));
     }
 
