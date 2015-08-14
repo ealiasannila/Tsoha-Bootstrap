@@ -4,12 +4,12 @@ Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://eannila.users.cs.helsinki.fi/foorumi/)
 
-Käyttäjätunnus: KalleKayttaja
+Käyttäjätunnus: kallekayttaja
 Salasana: passu
 
 tai vaihtoehtoisesti
 
-Käyttäjätunnus: TaunoTrolli
+Käyttäjätunnus: taunotrolli
 Salasana: peikko
 
 

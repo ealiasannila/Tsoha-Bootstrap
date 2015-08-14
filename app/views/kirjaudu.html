@@ -2,8 +2,19 @@
 {% block content %}
 <h1>Kirjaudu sisään keskustelualueelle</h1>
 
+{% if virheet %}
+<div class="alert alert-danger">
+    <ul>
+
+        <li>{{virheet}}</li>
+
+    </ul>
+</div>
+{% endif %}
+
 <form method="post" action="{{base_path}}/kirjaudu">
     <div class="form-group">
+
         <label>Käyttäjätunnus</label>
         <input class="form-control" name="kayttajatunnus" value="{{kayttajatunnus}}" type="text">
     </div>

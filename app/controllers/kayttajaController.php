@@ -29,7 +29,7 @@ class kayttajaController extends BaseController {
         $kayttaja = Kayttaja::tunnista($params['kayttajatunnus'], $params['salasana']);
 
         if (!$kayttaja) {
-            View::make('/kirjaudu.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'kayttajatunnus' => $params['kayttajatunnus']));
+            View::make('/kirjaudu.html', array('virheet' => 'Väärä käyttäjätunnus tai salasana!', 'kayttajatunnus' => $params['kayttajatunnus']));
         } else {
             $_SESSION['user'] = $kayttaja->id;
 
