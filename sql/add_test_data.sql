@@ -1,5 +1,6 @@
 -- Lisää INSERT INTO lauseet tähän tiedostoon
-INSERT INTO Kayttaja (kayttajatunnus, salasana) VALUES ('KalleKayttaja', 'passu');
+INSERT INTO Kayttaja (kayttajatunnus, salasana) VALUES ('kallekayttaja', 'passu');
+INSERT INTO Kayttaja (kayttajatunnus, salasana) VALUES ('taunotrolli', 'peikko');
 INSERT INTO KayttajaRyhma (kuvaus) VALUES ('Yllapito');
 INSERT INTO Aihealue (otsikko, kuvaus) VALUES ('Kahvipoytakeskustelu', 'Mita sohvilla tapahtuu?');
 INSERT INTO Aihe (aihealue) VALUES (1);

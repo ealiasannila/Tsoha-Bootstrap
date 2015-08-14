@@ -3,7 +3,17 @@
 Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://eannila.users.cs.helsinki.fi/foorumi/)
-Sovelluksen eri osiin pääsee seuraamalla foorumin linkkejä, aivan kaikki linkit eivät vielä toimi, mutta suurin osa johtaa johonkin järkevään paikkaan. Aiheiden ja vastausten lähettäminen onnistuu.
+
+Käyttäjätunnus: KalleKayttaja
+Salasana: passu
+
+tai vaihtoehtoisesti
+
+Käyttäjätunnus: TaunoTrolli
+Salasana: peikko
+
+
+Sovelluksen eri osiin pääsee seuraamalla foorumin linkkejä, aivan kaikki linkit eivät vielä toimi, mutta suurin osa johtaa johonkin järkevään paikkaan. Aiheiden, aihealueiden ja vastausten lisääminen toimii, vastauksia voi myös muokata tai poistaa jos on kirjautunut sisään vastauksen lähettäneellä käyttäjällä. Sisään- ja uloskirjautuminen toimii. 
 
 * [Linkki dokumentaatiooni](https://github.com/ealiasannila/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 * [Linkki tietokantayhteyteen] (http://eannila.users.cs.helsinki.fi/foorumi/tietokantayhteys)
@@ -17,10 +27,8 @@ Sovelluksen eri osiin pääsee seuraamalla foorumin linkkejä, aivan kaikki link
 ##Todo:
 
 * vastausta lisättäessä vastaukset uusimmasta vanhimpaan
-* aihealueiden lisäysnäkymä
 
 * rekisteröityminen
-* kirjautuminen
 
 * käyttäjän viestien lukemisen tarkkailu
 * aihealueiden näyttäminen käyttäjän ryhmien mukaan

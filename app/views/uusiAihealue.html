@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Luo uusi aihealue</h2>
+{% if virheet %}
+<div class="alert alert-danger">
+    <ul>
+        {% for virhe in virheet %}
+        <li>{{virhe}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form method="post" action="{{base_path}}/uusiaihealue">
+    <div class="form-group">
+        <label>Otsikko</label>
+        <input name="otsikko" value="{{aihealue.otsikko}}" class="form-control" type="text">
+    </div>
+    <div class="form-group">
+        <label>Kuvaus</label>
+        <input name="kuvaus" value="{{aihealue.kuvaus}}" class="form-control" type="text">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Lisää</button>
+    <a href="{{base_path}}"<button type="submit" class="btn btn-danger">Peruuta</button></a>
+
+</form>
+{% endblock %}

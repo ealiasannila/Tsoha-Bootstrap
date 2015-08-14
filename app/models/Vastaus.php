@@ -17,6 +17,7 @@ class Vastaus extends BaseModel {
 
     public function __construct($attribuutit) {
         parent::__construct($attribuutit);
+          $this->validators = array('validoi_teksti', 'validoi_otsikko');
     }
     
     public function laatijanNimi(){
@@ -137,7 +138,21 @@ class Vastaus extends BaseModel {
     }
 
     
+    public function validoi_teksti(){
+        $errors = array();
+        if(!$this->validate_strlength($this->teksti, 1, 5000)){
+            $errors[] = 'Tekstin pituuden tulee olla välillä 1-5000';
+        }
+        return $errors;
+    }
     
+    public function validoi_otsikko(){
+        $errors = array();
+        if(!$this->validate_strlength($this->otsikko, 1, 50)){
+            $errors[] = 'Otsikon pituuden tulee olla välillä 1-50';
+        }
+        return $errors;
+    }
     
     public function lisaa() {
 
@@ -155,5 +170,19 @@ class Vastaus extends BaseModel {
 
 
     }
+    public function muokkaa() {
+        $kysely = DB::connection()->prepare('UPDATE Vastaus set teksti = :teksti WHERE id = :id');
+        $kysely->execute(array(
+            'teksti' => $this->teksti,
+            'id' => $this->id));
 
+    }
+    
+    
+    public function poista() {
+        $kysely = DB::connection()->prepare('DELETE FROM Vastaus WHERE id = :id');
+        $kysely->execute(array(
+            'id' => $this->id));
+
+    }
 }

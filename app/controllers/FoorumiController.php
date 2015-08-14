@@ -11,10 +11,11 @@
  *
  * @author elias
  */
-class FoorumiController {
+class FoorumiController extends BaseController{
 
     public static function listaa() {
 
+        
         $aihealueet = Aihealue::haeKaikki(); //muutetaan hae käyttäjäryhmillä
         View::make('foorumi.html', array('aihealueet' => $aihealueet));
     }

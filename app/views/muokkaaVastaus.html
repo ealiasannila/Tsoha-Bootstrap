@@ -3,12 +3,10 @@
 <h4><a href="{{base_path}}/aihealue/{{aihe.aihealue}}">{{aihe.aihealueenOtsikko()}}</a> </h4> 
 <h2><a href="{{base_path}}/aihe/{{aihe.id}}"> {{aihe.vastaukset()[0].otsikko}}</a></h2>
 
-<form method="post" action="{{base_path}}/aihe/{{aihe.id}}/vastaus">
+<form method="post" action="{{base_path}}/vastaus/{{vastaus.id}}/muokkaa">
 
     <div class="form-group">
-
-
-        <label>Uusi viesti</label>
+        <label>Muokkaa viestiä</label>
         {% if virheet %}
         <div class="alert alert-danger">
             <ul>
@@ -18,8 +16,7 @@
             </ul>
         </div>
         {% endif %}
-        <textarea name="teksti" rows="10" class="form-control">{{teksti}}</textarea>
-
+        <textarea name="teksti" rows="10" class="form-control">{{vastaus.teksti}}</textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">Lähetä</button>
@@ -36,11 +33,11 @@
             <td>Lahetetty</td>
 
         </tr>
-        {% for vastaus in aihe.vastaukset() %}
+        {% for toinenvastaus in aihe.vastaukset() %}
         <tr>
-            <td><a href="{{base_path}}/kayttaja/{{vastaus.laatija}}">{{vastaus.laatijanNimi}}</a></td>
-            <td>{{vastaus.teksti}}</td>
-            <td>{{vastaus.julkaistu}}</td>
+            <td><a href="{{base_path}}/kayttaja/{{toinenvastaus.laatija}}">{{toinenvastaus.laatijanNimi}}</a></td>
+            <td>{{toinenvastaus.teksti}}</td>
+            <td>{{toinenvastaus.julkaistu}}</td>
         </tr>
         {% endfor %}
 

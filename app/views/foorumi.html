@@ -20,7 +20,8 @@
         </tr>
         {% endfor %}
     </table>
+    {% if user_logged_in %} 
     <a href="{{base_path}}/uusiaihealue"><button class="btn btn-primary">Uusi aihealue</button></a>
-
+    {% endif %}
 </div>
 {% endblock %}

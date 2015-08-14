@@ -17,6 +17,7 @@ class Aihe extends BaseModel {
 
     public function __construct($attribuutit) {
         parent::__construct($attribuutit);
+        $this->validators = array();
     }
 
     public function aihealueenOtsikko() {

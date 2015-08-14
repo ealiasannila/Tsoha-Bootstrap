@@ -2,16 +2,25 @@
 {% block content %}
 <h4><a href="{{base_url}}/aihealue/{{aihealue.id}}">{{aihealue.otsikko}}</a> </h4> 
 <h2>Luo uusi keskusteluaihe</h2>
+ {% if virheet %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for virhe in virheet %}
+                <li>{{virhe}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
 
 <form method="post" action="{{base_path}}/aihealue/{{aihealue.id}}/uusiaihe">
     <div class="form-group">
         <label>Otsikko</label>
-        <input name="otsikko" class="form-control" type="text">
+        <input name="otsikko" value="{{aloitus.otsikko}}" class="form-control" type="text">
     </div>
 
     <div class="form-group">
         <label>Viesti</label>
-        <textarea name="teksti" rows="10" class="form-control"></textarea>
+        <textarea name="teksti" rows="10" class="form-control">{{aloitus.teksti}}</textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">Lähetä</button>

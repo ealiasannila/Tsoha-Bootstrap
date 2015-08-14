@@ -17,18 +17,17 @@ class Kayttaja extends BaseModel {
 
     public function __construct($attribuutit) {
         parent::__construct($attribuutit);
-        
     }
-    
-    public function viestit(){
+
+    public function viestit() {
         return Vastaus::haeKayttajalla($this->id);
     }
-    
-    public function kayttajaryhmat(){
+
+    public function kayttajaryhmat() {
         return Kayttajaryhma::haeKayttajalla($this->id);
     }
-    
-    public function vastauksienMaara(){
+
+    public function vastauksienMaara() {
         return count($this->viestit());
     }
 
@@ -84,6 +83,24 @@ class Kayttaja extends BaseModel {
 
         $this->id = $rivi['id'];
         $this->liittynyt = $rivi['liittynyt'];
+    }
+
+    public static function tunnista($kayttajatunnus, $salasana) {
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus AND salasana = :salasana LIMIT 1', array('kayttajatunnus' => $kayttajatunnus, 'password' => $salasana));
+        $query->execute(array(
+            'salasana' => $salasana,
+            'kayttajatunnus' => $kayttajatunnus));
+        $rivi = $query->fetch();
+        if ($rivi) {
+            return new Kayttaja(array(
+                'id' => $rivi['id'],
+                'kayttajatunnus' => $rivi['kayttajatunnus'],
+                'salasana' => $rivi['salasana'],
+                'liittynyt' => $rivi['liittynyt']
+            ));
+        } else {
+            return NULL;
+        }
     }
 
 }

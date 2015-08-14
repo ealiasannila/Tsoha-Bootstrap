@@ -17,34 +17,33 @@ class Aihealue extends BaseModel {
 
     public function __construct($attribuutit) {
         parent::__construct($attribuutit);
-
+        $this->validators = array('validoi_kuvaus', 'validoi_otsikko');
     }
-    
-    public function viestit(){
+
+    public function viestit() {
         return Vastaus::haeAihealueella($this->id);
     }
-    
-    public function viestienMaara(){
+
+    public function viestienMaara() {
         return count($this->viestit());
     }
-    
-    public function viimeisinViesti(){
-        $viestit =  $this->viestit();
-        return $viestit[count($viestit)-1];
+
+    public function viimeisinViesti() {
+        $viestit = $this->viestit();
+        return $viestit[count($viestit) - 1];
     }
 
-    public function aiheidenMaara(){
+    public function aiheidenMaara() {
         return count($this->aiheet());
     }
-    
-    public function aiheet(){
+
+    public function aiheet() {
         return Aihe::haeAihealueella($this->id);
     }
-    
-    public function kayttajaryhmat(){
+
+    public function kayttajaryhmat() {
         return Kayttajaryhma::haeAihealueella($this->id);
     }
-
 
     public static function haeKaikki() {
 
@@ -85,12 +84,28 @@ class Aihealue extends BaseModel {
         return $aihealue;
     }
 
+    public function validoi_otsikko() {
+        $errors = array();
+        if (!$this->validate_strlength($this->otsikko, 1, 50)) {
+            $errors[] = 'Otsikon pituuden tulee olla välillä 1-5000';
+        }
+        return $errors;
+    }
+
+    public function validoi_kuvaus() {
+        $errors = array();
+        if (!$this->validate_strlength($this->kuvaus, 1, 50)) {
+            $errors[] = 'kuvauksen pituuden tulee olla välillä 1-5000';
+        }
+        return $errors;
+    }
+
     public function lisaa() {
 
         $kysely = DB::connection()->prepare('INSERT INTO Aihealue (kuvaus, otsikko) VALUES (:kuvaus, :otsikko) RETURNING id');
         $kysely->execute(array(
-        'otsikko' => $this->otsikko,
-        'kuvaus' => $this->kuvaus));
+            'otsikko' => $this->otsikko,
+            'kuvaus' => $this->kuvaus));
 
         $rivi = $kysely->fetch();
 

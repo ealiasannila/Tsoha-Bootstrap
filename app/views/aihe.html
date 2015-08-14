@@ -14,13 +14,25 @@
         {% for vastaus in aihe.vastaukset() %}
         <tr>
             <td><a href="{{base_path}}/kayttaja/{{vastaus.laatija}}">{{vastaus.laatijanNimi()}}</a></td>
-            <td>{{vastaus.teksti}}</td>
+            <td>{{vastaus.teksti}}<br>
+                 {% if user_logged_in.id == vastaus.laatija %}
+                <a href="{{base_path}}/vastaus/{{vastaus.id}}/muokkaa"><button class="btn btn-default btn-xs">Muokkaa</button></a>
+                <a href="{{base_path}}/vastaus/{{vastaus.id}}/poista"><button class="btn btn-danger btn-xs">Poista</button></a>
+                {% endif %}
+            </td>
             <td>Lähetetty {{vastaus.julkaistu}}</td>
         </tr>
         {% endfor %}
-        
+
     </table>
-    
+
+    {% if user_logged_in %}
     <a href="{{base_path}}/aihe/{{aihe.id}}/vastaus"><button class="btn btn-primary">Vastaa</button></a>
+    {% else %}
+    <a href="{{base_path}}/kirjaudu"><button class="btn btn-primary">Kirjaudu sisään vastataksesi</button></a>
+    
+    {% endif %}
+    
+    
 </div>
 {% endblock %}
