@@ -47,6 +47,30 @@ class Aihealue extends BaseModel {
         return Kayttajaryhma::haeAihealueella($this->id);
     }
 
+    public function kayttajaSaaNahda($kayttaja) {
+        $alueenryhmat = $this->kayttajaryhmat();
+        if (count($alueenryhmat) == 0) {
+            return true;
+        }
+        if ($kayttaja == null) {
+            return false;
+        }
+        $kayttajanryhmat = Kayttajaryhma::haeKayttajalla($kayttaja->id);
+
+
+        for ($j = 0; $j < count($kayttajanryhmat); $j++) {
+            if($kayttajanryhmat[$j]->id==1){//ylläpto
+                return true;
+            }
+            for ($i = 0; $i < count($alueenryhmat); $i++) {
+                if ($alueenryhmat[$i]->id == $kayttajanryhmat[$j]->id) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static function haeKaikki() {
 
         $kysely = DB::connection()->prepare('SELECT * FROM Aihealue');
@@ -113,8 +137,15 @@ class Aihealue extends BaseModel {
 
         $this->id = $rivi['id'];
     }
-    
-    
+
+    public function lisaaAlueelleRyhma($ryhmaid) {
+        $kysely = DB::connection()->prepare('INSERT INTO AihealueKuuluu (aihealue, KayttajaRyhma) VALUES (:aihealue, :ryhma)');
+        $kysely->execute(array(
+            'aihealue' => $this->id,
+            'ryhma' => $ryhmaid
+        ));
+    }
+
     public function muokkaa() {
         $kysely = DB::connection()->prepare('UPDATE Aihealue set kuvaus = :kuvaus, otsikko = :otsikko WHERE id = :id');
         $kysely->execute(array(
@@ -124,11 +155,10 @@ class Aihealue extends BaseModel {
     }
 
     public function poista() {
-       
+
         $kysely = DB::connection()->prepare('DELETE FROM Aihealue WHERE id = :id');
         $kysely->execute(array(
             'id' => $this->id));
     }
-
 
 }

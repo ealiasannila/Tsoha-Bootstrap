@@ -2,7 +2,11 @@
 {% block content %}
 <h2>{{aihealue.otsikko}}</h2>
 <h2 class="small">{{aihealue.kuvaus}}</h2>
+{% if ryhma[0] %}
 <h2 class="small">Nakyy ryhmille: {% for ryhma in aihealue.kayttajaryhmat() %}<a href="{{base_path}}/ryhma/{{ryhma.id}}">{{ryhma.kuvaus}}</a>, {% endfor %}</h2>
+{% else %}
+<h2 class="small">Julkinen</h2>
+{% endif %}
 
 <div>
     <table class="table table-bordered">

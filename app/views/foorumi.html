@@ -11,6 +11,7 @@
             <td>Uusin Viesti</td>
         </tr>
         {% for aihealue in aihealueet %}
+        {% if aihealue.kayttajaSaaNahda(user_logged_in) %}
         <tr>
             <td><a href ="{{base_path}}/aihealue/{{aihealue.id}}">{{aihealue.otsikko}}</a><br> <p class="small"> {{aihealue.kuvaus}}</p>
                 {% if user_logged_in.kuuluuRyhmaan(1) %}
@@ -23,6 +24,7 @@
             <td><a href="{{base_path}}/aihe/{{aihealue.viimeisinViesti().aihe}}">{{aihealue.viimeisinViesti().julkaistu}} </a> <br> käyttäjältä <br> <a href="{{base_path}}/kayttaja/{{aihealue.viimeisinViesti().laatija}}"> {{aihealue.viimeisinViesti().laatijanNimi()}} </a></td>
 
         </tr>
+        {% endif %}
         {% endfor %}
     </table>
     {% if user_logged_in %} 

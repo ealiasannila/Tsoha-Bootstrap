@@ -13,15 +13,24 @@
  */
 class AihealueController extends BaseController {
 
-    public static function listaa($id) {
+    public static function listaa() {
+        $aihealueet = Aihealue::haeKaikki(); 
+        View::make('foorumi.html', array('aihealueet' => $aihealueet));
+    }
 
+    public static function nayta($id) {
         $aihealue = Aihealue::haeYksi($id);
-        View::make('aihealue.html', array('aihealue' => $aihealue));
+        $kayttaja = self::get_user_logged_in();
+        if ($aihealue->kayttajaSaaNahda($kayttaja)) {
+            View::make('aihealue.html', array('aihealue' => $aihealue));
+        }
+        Redirect::to('/');
     }
 
     public static function naytaLisays() {
         self::check_yllapito();
-        View::make('uusiAihealue.html');
+        $kayttajaryhmat = Kayttajaryhma::haeKaikki();
+        View::make('uusiAihealue.html', array('kayttajaryhmat' => $kayttajaryhmat));
     }
 
     public static function lisaaAihealue() {
@@ -32,19 +41,31 @@ class AihealueController extends BaseController {
             'otsikko' => $lomakkeenTiedot['otsikko'],
             'kuvaus' => $lomakkeenTiedot['kuvaus']
         ));
+
+
+
         $virheet = $aihealue->errors();
         if (count($virheet) == 0) {
             $aihealue->lisaa();
+
+            $ryhmat = $lomakkeenTiedot['ryhmat'];
+
+            for ($i = 0; $i < count($ryhmat); $i++) {
+                $aihealue->lisaaAlueelleRyhma($ryhmat[$i]);
+            }
             Redirect::to('/aihealue/' . $aihealue->id);
         }
-        View::make('uusiAihealue.html', array('aihealue' => $aihealue, 'virheet' => $virheet));
+        $kayttajaryhmat = Kayttajaryhma::haeKaikki();
+        View::make('uusiAihealue.html', array('aihealue' => $aihealue, 'virheet' => $virheet, 'kayttajaryhmat' => $kayttajaryhmat));
     }
 
     public static function naytaMuokkaus($id) {
         self::check_yllapito();
 
         $aihealue = Aihealue::haeYksi($id);
-        View::make('muokkaaAihealue.html', array('aihealue' => $aihealue));
+        $kayttajaryhmat = Kayttajaryhma::haeKaikki();
+
+        View::make('muokkaaAihealue.html', array('aihealue' => $aihealue, 'kayttajaryhmat' => $kayttajaryhmat));
     }
 
     public static function muokkaa($id) {
@@ -61,7 +82,8 @@ class AihealueController extends BaseController {
             $aihealue->muokkaa();
             Redirect::to('/aihealue/' . $aihealue->id);
         } else {
-            View::make('muokkaaAihealue.html', array('aihealue' => $aihealue, 'virheet' => $errors));
+            $kayttajaryhmat = Kayttajaryhma::haeKaikki();
+            View::make('muokkaaAihealue.html', array('aihealue' => $aihealue, 'virheet' => $errors, 'kayttajaryhmat' => $kayttajaryhmat));
         }
     }
 

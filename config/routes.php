@@ -41,11 +41,11 @@ $routes->get('/aihealue/:id/poista','tarkistaKirjautuminen', function($id) {
     AihealueController::poista($id);
 });
 $routes->get('/aihealue/:id', function($id) {
-    AihealueController::listaa($id);
+    AihealueController::nayta($id);
 });
 
 $routes->get('/', function() {
-    FoorumiController::listaa();
+    AihealueController::listaa();
 });
 
 $routes->get('/aihe/:id', function($id) {

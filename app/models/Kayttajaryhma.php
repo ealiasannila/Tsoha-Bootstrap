@@ -21,7 +21,7 @@ class Kayttajaryhma extends BaseModel {
 
     public static function haeKayttajalla($kayttajaId) {
 
-        $kysely = DB::connection()->prepare('SELECT * FROM Kayttajaryhma WHERE id IN (SELECT kayttaja FROM KayttajaKuuluu WHERE kayttaja = :kayttaja)');
+        $kysely = DB::connection()->prepare('SELECT * FROM Kayttajaryhma WHERE id IN (SELECT kayttajaryhma FROM KayttajaKuuluu WHERE kayttaja = :kayttaja)');
         $kysely->execute(array('kayttaja' => $kayttajaId));
         
         $rivit = $kysely->fetchAll();
@@ -38,7 +38,7 @@ class Kayttajaryhma extends BaseModel {
     }
     public static function haeAihealueella($aihealueId) {
 
-        $kysely = DB::connection()->prepare('SELECT * FROM Kayttajaryhma WHERE id IN (SELECT aihealue FROM aihealueKuuluu WHERE aihealue = :aihealue)');
+        $kysely = DB::connection()->prepare('SELECT * FROM Kayttajaryhma WHERE id IN (SELECT kayttajaryhma FROM aihealueKuuluu WHERE aihealue = :aihealue)');
         $kysely->execute(array('aihealue' => $aihealueId));
         
         $rivit = $kysely->fetchAll();

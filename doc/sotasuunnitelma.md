@@ -1,10 +1,9 @@
 
 1. vastausta lisättäessä vastaukset uusimmasta vanhimpaan
-2. aihealueiden lisäysnäkymä
 
 4. luettu taulu
-5. rekisteröityminen
-5. kirjautuminen
-6. aihealueiden näyttäminen käyttäjän ryhmien mukaan
 7. käyttäjäryhmien hallinta
-7. näkymien hiontaa
+8. viestien haku
+9. ylläpito voi muokata viestiä
+10. näkymien hiontaa
+
