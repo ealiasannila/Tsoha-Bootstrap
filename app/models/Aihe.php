@@ -27,7 +27,9 @@ class Aihe extends BaseModel {
 
     public function viimeisinViesti() {
         $vastaukset = $this->vastaukset();
-        return $vastaukset[count($vastaukset) - 1];
+        if (count($vastaukset) > 0) {
+            return $vastaukset[count($vastaukset) - 1];
+        }
     }
 
     public function vastaukset() {
@@ -103,4 +105,10 @@ class Aihe extends BaseModel {
         $this->id = $rivi['id'];
     }
 
+    public function poista() {
+        $kysely = DB::connection()->prepare('DELETE FROM Aihe WHERE id = :id');
+        $kysely->execute(array(
+            'id' => $this->id));
+    }
+    
 }

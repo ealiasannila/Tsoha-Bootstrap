@@ -30,7 +30,9 @@ class Aihealue extends BaseModel {
 
     public function viimeisinViesti() {
         $viestit = $this->viestit();
-        return $viestit[count($viestit) - 1];
+        if (count($viestit) > 0) {
+            return $viestit[count($viestit) - 1];
+        }
     }
 
     public function aiheidenMaara() {
@@ -111,5 +113,22 @@ class Aihealue extends BaseModel {
 
         $this->id = $rivi['id'];
     }
+    
+    
+    public function muokkaa() {
+        $kysely = DB::connection()->prepare('UPDATE Aihealue set kuvaus = :kuvaus, otsikko = :otsikko WHERE id = :id');
+        $kysely->execute(array(
+            'kuvaus' => $this->kuvaus,
+            'otsikko' => $this->otsikko,
+            'id' => $this->id));
+    }
+
+    public function poista() {
+       
+        $kysely = DB::connection()->prepare('DELETE FROM Aihealue WHERE id = :id');
+        $kysely->execute(array(
+            'id' => $this->id));
+    }
+
 
 }

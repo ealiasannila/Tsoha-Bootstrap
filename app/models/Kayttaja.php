@@ -17,6 +17,7 @@ class Kayttaja extends BaseModel {
 
     public function __construct($attribuutit) {
         parent::__construct($attribuutit);
+        $this->validators = array('validoi_kayttajatunnus');
     }
 
     public function viestit() {
@@ -25,6 +26,13 @@ class Kayttaja extends BaseModel {
 
     public function kayttajaryhmat() {
         return Kayttajaryhma::haeKayttajalla($this->id);
+    }
+
+    public function kuuluuRyhmaan($ryhmaid) {
+        if (in_array(Kayttajaryhma::haeYksi($ryhmaid), $this->kayttajaryhmat())) {
+            return true;
+        }
+        return false;
     }
 
     public function vastauksienMaara() {
@@ -74,7 +82,8 @@ class Kayttaja extends BaseModel {
 
     public function lisaa() {
 
-        $kysely = DB::connection()->prepare('INSERT INTO Kayttaja (kayttajatunnus, salasana) VALUES (:kayttajatunnus, :salasana) RETURNING id liittynyt');
+
+        $kysely = DB::connection()->prepare('INSERT INTO Kayttaja (kayttajatunnus, salasana) VALUES (:kayttajatunnus, :salasana) RETURNING id');
         $kysely->execute(array(
             'salasana' => $this->salasana,
             'kayttajatunnus' => $this->kayttajatunnus));
@@ -82,15 +91,39 @@ class Kayttaja extends BaseModel {
         $rivi = $kysely->fetch();
 
         $this->id = $rivi['id'];
-        $this->liittynyt = $rivi['liittynyt'];
+    }
+
+    public function validoi_kayttajatunnus() {
+        $errors = array();
+
+        $kysely = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus LIMIT 1');
+        $kysely->execute(array(
+            'kayttajatunnus' => $this->kayttajatunnus));
+        $rivi = $kysely->fetch();
+        if ($rivi) {
+            $errors[] = 'kayttajatunnus jo käytössä';
+        } else {
+            if (!$this->validate_strlength($this->kayttajatunnus, 1, 50)) {
+                $errors[] = 'käyttäjätunnuksen pituuden tulee olla välilä 1-50';
+            }
+        }
+        return $errors;
+    }
+
+    public function validoi_salasana() {
+        $errors = array();
+        if (!$this->validate_strlength($this->salasana, 4, 50)) {
+            $errors[] = 'salasanan pituuden tulee olla välilä 4-50';
+        }
+        return $errors;
     }
 
     public static function tunnista($kayttajatunnus, $salasana) {
-        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus AND salasana = :salasana LIMIT 1', array('kayttajatunnus' => $kayttajatunnus, 'password' => $salasana));
-        $query->execute(array(
+        $kysely = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus AND salasana = :salasana LIMIT 1');
+        $kysely->execute(array(
             'salasana' => $salasana,
             'kayttajatunnus' => $kayttajatunnus));
-        $rivi = $query->fetch();
+        $rivi = $kysely->fetch();
         if ($rivi) {
             return new Kayttaja(array(
                 'id' => $rivi['id'],

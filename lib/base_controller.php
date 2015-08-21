@@ -13,10 +13,19 @@ class BaseController {
         return null;
     }
 
-
     public static function check_logged_in() {
-        // Toteuta kirjautumisen tarkistus tähän.
-        // Jos käyttäjä ei ole kirjautunut sisään, ohjaa hänet toiselle sivulle (esim. kirjautumissivulle).
+        if (!isset($_SESSION['user'])) {
+            Redirect::to('/kirjaudu', array('message' => 'Kirjaudu ensin sisään!'));
+        }
+    }
+
+    public static function check_yllapito() {
+        self::check_logged_in();
+
+        $kayttaja = self::get_user_logged_in();
+        if (!$kayttaja->kuuluuRyhmaan(1)) {
+            Redirect::to('/');
+        }
     }
 
 }

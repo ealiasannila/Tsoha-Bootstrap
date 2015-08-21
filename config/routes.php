@@ -1,35 +1,49 @@
 <?php
 
+function tarkistaKirjautuminen(){
+    BaseController::check_logged_in();
+}
 
-$routes->get('/aihealue/:id/uusiaihe', function($id) {
+
+$routes->get('/aihealue/:id/uusiaihe', 'tarkistaKirjautuminen', function($id) {
     AiheController::naytaLisays($id);
 });
-$routes->post('/aihealue/:id/uusiaihe', function($id) {
+$routes->post('/aihealue/:id/uusiaihe', 'tarkistaKirjautuminen', function($id) {
     AiheController::lisaaAihe($id);
 });
 
-$routes->get('/aihe/:id/vastaus', function($id) {
-    VastausController::listaa($id);
+$routes->get('/aihe/:id/vastaus','tarkistaKirjautuminen', function($id) {
+    VastausController::naytaLisays($id);
 });
-$routes->post('/aihe/:id/vastaus', function($id) {
+$routes->post('/aihe/:id/vastaus','tarkistaKirjautuminen', function($id) {
     VastausController::lisaaVastaus($id);
 });
 
 
-$routes->get('/vastaus/:id/muokkaa', function($id) {
+$routes->get('/vastaus/:id/muokkaa','tarkistaKirjautuminen', function($id) {
     VastausController::naytaMuokkaus($id);
 });
-$routes->post('/vastaus/:id/muokkaa', function($id) {
+$routes->post('/vastaus/:id/muokkaa','tarkistaKirjautuminen', function($id) {
     VastausController::muokkaaVatausta($id);
 });
-$routes->get('/vastaus/:id/poista', function($id) {
+$routes->get('/vastaus/:id/poista','tarkistaKirjautuminen', function($id) {
     VastausController::poista($id);
 });
 
 
+$routes->get('/aihealue/:id/muokkaa','tarkistaKirjautuminen', function($id) {
+    AihealueController::naytaMuokkaus($id);
+});
+$routes->post('/aihealue/:id/muokkaa','tarkistaKirjautuminen', function($id) {
+    AihealueController::muokkaa($id);
+});
+$routes->get('/aihealue/:id/poista','tarkistaKirjautuminen', function($id) {
+    AihealueController::poista($id);
+});
 $routes->get('/aihealue/:id', function($id) {
     AihealueController::listaa($id);
 });
+
 $routes->get('/', function() {
     FoorumiController::listaa();
 });
@@ -50,11 +64,18 @@ $routes->post('/kirjaudu', function() {
 $routes->post('/kirjaudu_ulos', function() {
     kayttajaController::kirjauduUlos();
 });
+$routes->get('/rekisteroidy', function() {
+    kayttajaController::naytaRekisteroityminen();
+});
+$routes->post('/rekisteroidy', function() {
+    kayttajaController::rekisteroidy();
+});
 
-$routes->post('/uusiaihealue', function() {
+
+$routes->post('/uusiaihealue','tarkistaKirjautuminen', function() {
     AihealueController::lisaaAihealue();
 });
-$routes->get('/uusiaihealue', function() {
+$routes->get('/uusiaihealue','tarkistaKirjautuminen', function() {
     AihealueController::naytaLisays();
 });
 

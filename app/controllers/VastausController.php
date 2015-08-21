@@ -13,14 +13,24 @@
  */
 class VastausController extends BaseController {
 
+    public static function tarkistaKayttaja($viestiId) {
+    if (self::get_user_logged_in()->id != Vastaus::haeYksi($viestiId)->laatija) {
+        
+            Redirect::to('/aihe/' . Vastaus::haeYksi($viestiId)->aihe);
+        }
+    }
+
     public static function naytaMuokkaus($id) {
 
+        self::tarkistaKayttaja($id);
         $vastaus = Vastaus::haeYksi($id);
         $aihe = Aihe::haeYksi($vastaus->aihe);
         View::make('muokkaaVastaus.html', array('vastaus' => $vastaus, 'aihe' => $aihe));
     }
 
     public static function muokkaaVatausta($id) {
+        
+        self::tarkistaKayttaja($id);
         $lomakkeenTiedot = $_POST;
         $vastaus = Vastaus::haeYksi($id);
         $vastaus->teksti = $lomakkeenTiedot['teksti'];
@@ -38,13 +48,19 @@ class VastausController extends BaseController {
     }
 
     public static function poista($id) {
+        
+        self::tarkistaKayttaja($id);
         $vastaus = Vastaus::haeYksi($id);
         $vastaus->poista();
 
-        Redirect::to('/aihe/' . $vastaus->aihe);
+        if (Aihe::haeYksi($vastaus->aihe)) {
+            Redirect::to('/aihe/' . $vastaus->aihe);
+        } else {
+            Redirect::to('/');
+        }
     }
 
-    public static function listaa($id) {
+    public static function naytaLisays($id) {
 
         $aihe = Aihe::haeYksi($id);
 
@@ -65,7 +81,7 @@ class VastausController extends BaseController {
 
         $errors = $vastaus->errors();
         if (count($errors) == 0) {
-
+            
             $vastaus->lisaa();
             Redirect::to('/aihe/' . $vastaus->aihe);
         } else {

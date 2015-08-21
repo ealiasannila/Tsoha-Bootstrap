@@ -17,15 +17,15 @@ class Vastaus extends BaseModel {
 
     public function __construct($attribuutit) {
         parent::__construct($attribuutit);
-          $this->validators = array('validoi_teksti', 'validoi_otsikko');
+        $this->validators = array('validoi_teksti', 'validoi_otsikko');
     }
-    
-    public function laatijanNimi(){
+
+    public function laatijanNimi() {
         $kayttaja = Kayttaja::haeYksi($this->laatija);
         return $kayttaja->kayttajatunnus;
     }
 
-        public static function haeKaikki() {
+    public static function haeKaikki() {
 
         $kysely = DB::connection()->prepare('SELECT * FROM Vastaus');
         $kysely->execute();
@@ -67,8 +67,6 @@ class Vastaus extends BaseModel {
         return $vastaukset;
     }
 
-    
-    
     public static function haeAiheella($aiheId) {
 
         $kysely = DB::connection()->prepare('SELECT * FROM Vastaus WHERE aihe = :aihe ORDER BY julkaistu');
@@ -90,7 +88,6 @@ class Vastaus extends BaseModel {
         return $vastaukset;
     }
 
-    
     public static function haeAihealueella($aihealueId) {
 
         $kysely = DB::connection()->prepare('SELECT * FROM Vastaus WHERE aihe IN (SELECT id FROM Aihe WHERE aihealue = :aihealue) ORDER BY julkaistu');
@@ -112,7 +109,6 @@ class Vastaus extends BaseModel {
         return $vastaukset;
     }
 
-    
     public static function haeYksi($id) {
 
         $kysely = DB::connection()->prepare('SELECT * FROM Vastaus WHERE id = :id LIMIT 1');
@@ -137,23 +133,22 @@ class Vastaus extends BaseModel {
         return $vastaus;
     }
 
-    
-    public function validoi_teksti(){
+    public function validoi_teksti() {
         $errors = array();
-        if(!$this->validate_strlength($this->teksti, 1, 5000)){
+        if (!$this->validate_strlength($this->teksti, 1, 5000)) {
             $errors[] = 'Tekstin pituuden tulee olla välillä 1-5000';
         }
         return $errors;
     }
-    
-    public function validoi_otsikko(){
+
+    public function validoi_otsikko() {
         $errors = array();
-        if(!$this->validate_strlength($this->otsikko, 1, 50)){
+        if (!$this->validate_strlength($this->otsikko, 1, 50)) {
             $errors[] = 'Otsikon pituuden tulee olla välillä 1-50';
         }
         return $errors;
     }
-    
+
     public function lisaa() {
 
         $kysely = DB::connection()->prepare('INSERT INTO Vastaus (otsikko, teksti, laatija, aihe) VALUES (:otsikko, :teksti, :laatija, :aihe) RETURNING id, julkaistu');
@@ -167,22 +162,24 @@ class Vastaus extends BaseModel {
 
         $this->id = $rivi['id'];
         $this->julkaistu = $rivi['julkaistu'];
-
-
     }
+
     public function muokkaa() {
         $kysely = DB::connection()->prepare('UPDATE Vastaus set teksti = :teksti WHERE id = :id');
         $kysely->execute(array(
             'teksti' => $this->teksti,
             'id' => $this->id));
-
     }
-    
-    
+
     public function poista() {
+        $aihe = Aihe::haeYksi($this->aihe);
+        if($aihe->vastauksienMaara()<=1){
+            $aihe->poista();
+        }
+        
         $kysely = DB::connection()->prepare('DELETE FROM Vastaus WHERE id = :id');
         $kysely->execute(array(
             'id' => $this->id));
-
     }
+
 }

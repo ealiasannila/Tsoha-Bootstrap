@@ -23,6 +23,34 @@ class kayttajaController extends BaseController {
         View::make('kirjaudu.html');
     }
 
+    public static function naytaRekisteroityminen() {
+        View::make('rekisteroidy.html');
+    }
+
+    public static function rekisteroidy() {
+        $lomakkeenTiedot = $_POST;
+
+        $kayttaja = new Kayttaja(array(
+            'kayttajatunnus' => $lomakkeenTiedot['kayttajatunnus'],
+            'salasana' => $lomakkeenTiedot['salasana']
+        ));
+
+        $errors = $kayttaja->errors();
+        if (count($errors) == 0) {
+
+            if ($lomakkeenTiedot['salasanauudestaan'] != $kayttaja->salasana) {
+                $errors[] = "salasanat eivät täsmää";
+            } else {
+
+                $kayttaja->lisaa();
+                Redirect::to('/');
+            }
+        }
+            
+        View::make('rekisteroidy.html', array('kayttaja' => $kayttaja, 'virheet' => $errors));
+        
+    }
+
     public static function teeKirjautuminen() {
         $params = $_POST;
 
@@ -36,12 +64,10 @@ class kayttajaController extends BaseController {
             Redirect::to('/');
         }
     }
-    
-    
+
     public static function kirjauduUlos() {
         $_SESSION['user'] = null;
         Redirect::to('/');
     }
-    
 
 }
