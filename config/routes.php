@@ -5,6 +5,11 @@ function tarkistaKirjautuminen(){
 }
 
 
+$routes->post('/haku', function() {
+    VastausController::hae();
+});
+
+
 $routes->get('/aihealue/:id/uusiaihe', 'tarkistaKirjautuminen', function($id) {
     AiheController::naytaLisays($id);
 });

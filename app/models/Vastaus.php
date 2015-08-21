@@ -25,6 +25,19 @@ class Vastaus extends BaseModel {
         return $kayttaja->kayttajatunnus;
     }
 
+    public static function haeHakusanalla($hakusanat) {
+        $vastaukset = array();
+        $kaikki = self::haeKaikki();
+        for ($i = 0; $i < count($hakusanat); $i++) {
+            for ($j = 0; $j < count($kaikki); $j++) {
+                if (strpos($kaikki[$j]->teksti,$hakusanat[$i]) !== false) {
+                    $vastaukset[] = $kaikki[$j];
+                }
+            }
+        }
+        return $vastaukset;
+    }
+
     public static function haeKaikki() {
 
         $kysely = DB::connection()->prepare('SELECT * FROM Vastaus');
@@ -39,7 +52,7 @@ class Vastaus extends BaseModel {
                 'otsikko' => $rivi['otsikko'],
                 'teksti' => $rivi['teksti'],
                 'aihe' => $rivi['aihe'],
-                'aikaleima' => $rivi['aikaleima'],
+                'julkaistu' => $rivi['julkaistu'],
             ));
         }
 
@@ -173,10 +186,10 @@ class Vastaus extends BaseModel {
 
     public function poista() {
         $aihe = Aihe::haeYksi($this->aihe);
-        if($aihe->vastauksienMaara()<=1){
+        if ($aihe->vastauksienMaara() <= 1) {
             $aihe->poista();
         }
-        
+
         $kysely = DB::connection()->prepare('DELETE FROM Vastaus WHERE id = :id');
         $kysely->execute(array(
             'id' => $this->id));

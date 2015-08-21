@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <table class="table table-bordered">
+        <tr class="success h3">
+            <td>Aihe ja Kirjoittaja</td>
+            <td>Viesti</td>
+            <td>Lähetetty</td>
+        </tr>
+
+
+        {% for vastaus in vastaukset %}
+        <tr>
+            <td><a href="{{base_path}}/kayttaja/{{vastaus.laatija}}">{{vastaus.laatijanNimi()}}</a><br>{{vastaus.otsikko}}</td>
+            <td>{{vastaus.teksti}}<br>
+                 {% if user_logged_in.id == vastaus.laatija %}
+                <a href="{{base_path}}/vastaus/{{vastaus.id}}/muokkaa"><button class="btn btn-default btn-xs">Muokkaa</button></a>
+                <a href="{{base_path}}/vastaus/{{vastaus.id}}/poista"><button class="btn btn-danger btn-xs">Poista</button></a>
+                {% endif %}
+            </td>
+            <td>Lähetetty {{vastaus.julkaistu}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    {% if user_logged_in %}
+    <a href="{{base_path}}/aihe/{{aihe.id}}/vastaus"><button class="btn btn-primary">Vastaa</button></a>
+    {% else %}
+    <a href="{{base_path}}/kirjaudu"><button class="btn btn-primary">Kirjaudu sisään vastataksesi</button></a>
+    
+    {% endif %}
+    
+    
+</div>
+{% endblock %}

@@ -13,9 +13,18 @@
  */
 class VastausController extends BaseController {
 
-    public static function tarkistaKayttaja($viestiId) {
-    if (self::get_user_logged_in()->id != Vastaus::haeYksi($viestiId)->laatija) {
+    public static function hae() {
+        $hakusanat = $_POST['hakusanat'];
         
+        $hakusanat = explode(" ",$hakusanat);
+        $vastaukset = Vastaus::haeHakusanalla($hakusanat);
+
+        View::make('hakutulokset.html', array('vastaukset' => $vastaukset));
+    }
+
+    private static function tarkistaKayttaja($viestiId) {
+        if (self::get_user_logged_in()->id != Vastaus::haeYksi($viestiId)->laatija) {
+
             Redirect::to('/aihe/' . Vastaus::haeYksi($viestiId)->aihe);
         }
     }
@@ -29,7 +38,7 @@ class VastausController extends BaseController {
     }
 
     public static function muokkaaVatausta($id) {
-        
+
         self::tarkistaKayttaja($id);
         $lomakkeenTiedot = $_POST;
         $vastaus = Vastaus::haeYksi($id);
@@ -48,7 +57,7 @@ class VastausController extends BaseController {
     }
 
     public static function poista($id) {
-        
+
         self::tarkistaKayttaja($id);
         $vastaus = Vastaus::haeYksi($id);
         $vastaus->poista();
@@ -81,7 +90,7 @@ class VastausController extends BaseController {
 
         $errors = $vastaus->errors();
         if (count($errors) == 0) {
-            
+
             $vastaus->lisaa();
             Redirect::to('/aihe/' . $vastaus->aihe);
         } else {
