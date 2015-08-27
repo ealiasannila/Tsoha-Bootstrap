@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ryhma.kuvaus}}</h2>
+
+<div>
+    <p><strong>Jäsenet</strong></p>
+    <ul>
+        {% for jasen in ryhma.haeJasenet() %}
+        <li><a href="{{base_path}}/kayttaja/{{jasen.id}}"> {{jasen.kayttajatunnus}}</a></li>
+        <a href="{{base_path}}/kayttaja/{{vastaus.id}}/poista"><button class="btn btn-danger btn-xs">Poista</button></a>
+
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

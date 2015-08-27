@@ -18,6 +18,25 @@ class Kayttajaryhma extends BaseModel {
     public function __construct($attribuutit) {
         parent::__construct($attribuutit);
     }
+    
+    public function haeJasenet(){
+        $kysely = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE id IN (SELECT kayttaja FROM KayttajaKuuluu WHERE kayttajaryhma = :kayttajaryhma)');
+        $kysely->execute(array('kayttajaryhma' => $this->id));
+        
+        $rivit = $kysely->fetchAll();
+        $jasenet = array();
+
+        foreach ($rivit as $rivi) {
+            $jasenet[] = new Kayttaja(array(
+                'id' => $rivi['id'],
+                'kayttajatunnus' => $rivi['kayttajatunnus'],
+                'salasana' => $rivi['salasana'],
+                'liittynyt' => $rivi['liittynyt']
+            ));
+        }
+
+        return $jasenet;
+    }
 
     public static function haeKayttajalla($kayttajaId) {
 

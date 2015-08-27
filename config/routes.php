@@ -60,6 +60,13 @@ $routes->get('/kayttaja/:id', function($id) {
     kayttajaController::listaa($id);
 });
 
+
+$routes->get('/kayttajaryhma/:id', function($id) {
+    KayttajaRyhmaController::nayta($id);
+});
+
+
+
 $routes->get('/kirjaudu', function() {
     kayttajaController::naytaKirjautuminen();
 });
