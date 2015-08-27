@@ -39,3 +39,4 @@ Sovelluksen eri osiin pääsee seuraamalla foorumin linkkejä. Vastauksia voi my
 * käyttäjäryhmien hallinan sallimenen vain ylläpidolle
 * refaktorointia
 * näkymien hiontaa
+* hakutuloksiin linkki aiheeseen
