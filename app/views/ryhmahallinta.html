@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Kayttajaryhmien hallinta</h2>
+
+<div>
+    <form method="post" action="{{base_path}}/ryhmahallinta/uusiryhma">
+        <input type="text" name="ryhma">
+        <button type="submit" class="btn btn-primary" >Luo ryhma</button>
+    </form>
+    <p><strong>Ryhmät</strong></p>
+    <ul>
+        {% for ryhma in ryhmat%}
+        <li><a href="{{base_path}}/kayttajaryhma/{{ryhma.id}}"> {{ryhma.kuvaus}}</a></li>
+
+        <form method="post" action="{{base_path}}/ryhmahallinta/poistaryhma">
+            
+            <button type="submit" name="ryhma" value="{{ryhma.id}}" class="btn btn-danger btn-xs">Poista</button>
+        </form>
+
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

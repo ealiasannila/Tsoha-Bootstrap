@@ -3,11 +3,24 @@
 <h2>{{ryhma.kuvaus}}</h2>
 
 <div>
+    <form method="post" action="{{base_path}}/kayttajaryhma/{{ryhma.id}}/lisaajasen">
+        <select class="form-control" name="kayttaja">
+
+            {% for kayttaja in kayttajat %}
+            <option value="{{kayttaja.id}}">{{kayttaja.kayttajatunnus}}</option>        
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary" >Lisää jäsen</button>
+    </form>
     <p><strong>Jäsenet</strong></p>
     <ul>
         {% for jasen in ryhma.haeJasenet() %}
         <li><a href="{{base_path}}/kayttaja/{{jasen.id}}"> {{jasen.kayttajatunnus}}</a></li>
-        <a href="{{base_path}}/kayttaja/{{vastaus.id}}/poista"><button class="btn btn-danger btn-xs">Poista</button></a>
+
+        <form method="post" action="{{base_path}}/kayttajaryhma/{{ryhma.id}}/poistajasen">
+            
+            <button type="submit" name="kayttaja" value="{{jasen.id}}" class="btn btn-danger btn-xs">Poista</button>
+        </form>
 
         {% endfor %}
     </ul>

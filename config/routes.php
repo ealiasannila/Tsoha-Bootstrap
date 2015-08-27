@@ -64,6 +64,23 @@ $routes->get('/kayttaja/:id', function($id) {
 $routes->get('/kayttajaryhma/:id', function($id) {
     KayttajaRyhmaController::nayta($id);
 });
+$routes->post('/kayttajaryhma/:ryhmaid/lisaajasen/', function($ryhmaid) {
+    KayttajaRyhmaController::lisaaJasen($ryhmaid);
+});
+$routes->post('/kayttajaryhma/:ryhmaid/poistajasen/', function($ryhmaid) {
+    KayttajaRyhmaController::poistaJasen($ryhmaid);
+});
+
+
+$routes->get('/ryhmahallinta', function() {
+    KayttajaRyhmaController::listaa();
+});
+$routes->post('/ryhmahallinta/uusiryhma', function() {
+    KayttajaRyhmaController::lisaaRyhma();
+});
+$routes->post('/ryhmahallinta/poistaryhma', function() {
+    KayttajaRyhmaController::poistaRyhma();
+});
 
 
 

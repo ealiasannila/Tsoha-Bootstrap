@@ -18,11 +18,44 @@ class Kayttajaryhma extends BaseModel {
     public function __construct($attribuutit) {
         parent::__construct($attribuutit);
     }
-    
-    public function haeJasenet(){
+
+    public function lisaaRyhma() {
+
+        $kysely = DB::connection()->prepare('INSERT INTO Kayttajaryhma (kuvauss) VALUES (:kuvaus) RETURNING id');
+        $kysely->execute(array(
+            'kuvaus' => $this->kuvaus));
+        $rivi = $kysely->fetch();
+
+        $this->id = $rivi['id'];
+    }
+
+    public function poistaRyhma() {
+
+        $kysely = DB::connection()->prepare('DELETE FROM Kayttajaryhma WHERE id = :id');
+        $kysely->execute(array(
+            'id' => $this->id));
+    }
+
+    public function poistaJasen($kayttajaid) {
+
+        $kysely = DB::connection()->prepare('DELETE FROM KayttajaKuuluu WHERE kayttaja = :kayttaja AND kayttajaryhma=:ryhma');
+        $kysely->execute(array(
+            'kayttaja' => $kayttajaid,
+            'ryhma' => $this->id));
+    }
+
+    public function lisaaJasen($kayttjaid) {
+
+        $kysely = DB::connection()->prepare('INSERT INTO KayttajaKuuluu (kayttaja, kayttajaryhma) VALUES (:kayttaja, :ryhma)');
+        $kysely->execute(array(
+            'kayttaja' => $kayttjaid,
+            'ryhma' => $this->id));
+    }
+
+    public function haeJasenet() {
         $kysely = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE id IN (SELECT kayttaja FROM KayttajaKuuluu WHERE kayttajaryhma = :kayttajaryhma)');
         $kysely->execute(array('kayttajaryhma' => $this->id));
-        
+
         $rivit = $kysely->fetchAll();
         $jasenet = array();
 
@@ -42,7 +75,7 @@ class Kayttajaryhma extends BaseModel {
 
         $kysely = DB::connection()->prepare('SELECT * FROM Kayttajaryhma WHERE id IN (SELECT kayttajaryhma FROM KayttajaKuuluu WHERE kayttaja = :kayttaja)');
         $kysely->execute(array('kayttaja' => $kayttajaId));
-        
+
         $rivit = $kysely->fetchAll();
         $kayttajaryhmat = array();
 
@@ -55,11 +88,12 @@ class Kayttajaryhma extends BaseModel {
 
         return $kayttajaryhmat;
     }
+
     public static function haeAihealueella($aihealueId) {
 
         $kysely = DB::connection()->prepare('SELECT * FROM Kayttajaryhma WHERE id IN (SELECT kayttajaryhma FROM aihealueKuuluu WHERE aihealue = :aihealue)');
         $kysely->execute(array('aihealue' => $aihealueId));
-        
+
         $rivit = $kysely->fetchAll();
         $kayttajaryhmat = array();
 
@@ -73,8 +107,6 @@ class Kayttajaryhma extends BaseModel {
         return $kayttajaryhmat;
     }
 
-    
-    
     public static function haeKaikki() {
 
         $kysely = DB::connection()->prepare('SELECT * FROM Kayttajaryhma');
