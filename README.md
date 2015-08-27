@@ -4,16 +4,24 @@ Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://eannila.users.cs.helsinki.fi/foorumi/)
 
-Käyttäjätunnus: kallekayttaja
-Salasana: passu
+Sisään voi kirjautua seuraavilla tunnuksilla:
 
-tai vaihtoehtoisesti
+**Ylläpitäjä:**
+Käyttäjätunnus: yrjoyllapito
+Salasana: kuningas
 
+**Ryhmä pahikset:**
+Käyttäjätunnus: raunoraggari
+Salasana: punk
 Käyttäjätunnus: taunotrolli
 Salasana: peikko
 
+**Käyttäjät jotka eivät kuulu ryhmiin:**
+Käyttäjätunnus: askoaristokraatti
+Salasana: sivistys
 
-Sovelluksen eri osiin pääsee seuraamalla foorumin linkkejä, aivan kaikki linkit eivät vielä toimi, mutta suurin osa johtaa johonkin järkevään paikkaan. Aiheiden, aihealueiden ja vastausten lisääminen toimii, vastauksia voi myös muokata tai poistaa jos on kirjautunut sisään vastauksen lähettäneellä käyttäjällä. Sisään- ja uloskirjautuminen toimii. 
+
+Sovelluksen eri osiin pääsee seuraamalla foorumin linkkejä. Vastauksia voi myös muokata tai poistaa jos on kirjautunut sisään vastauksen lähettäneellä käyttäjällä tai ylläpitäjänä. Jotkin aihealueet näkyvät vain tietyille käyttäjäryhmille. Käyttäjäryhmien hallintaan pääsee navigaatiopalkista kun kirjautuu ylläpitäjänä sisään. 
 
 * [Linkki dokumentaatiooni](https://github.com/ealiasannila/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 * [Linkki tietokantayhteyteen] (http://eannila.users.cs.helsinki.fi/foorumi/tietokantayhteys)
@@ -27,11 +35,7 @@ Sovelluksen eri osiin pääsee seuraamalla foorumin linkkejä, aivan kaikki link
 ##Todo:
 
 * vastausta lisättäessä vastaukset uusimmasta vanhimpaan
-
-* rekisteröityminen
-
-* käyttäjän viestien lukemisen tarkkailu
-* aihealueiden näyttäminen käyttäjän ryhmien mukaan
-* käyttäjäryhmien hallinta
-
+* ylläpito voi muokata viestejä
+* käyttäjäryhmien hallinan sallimenen vain ylläpidolle
+* refaktorointia
 * näkymien hiontaa
