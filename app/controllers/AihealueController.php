@@ -80,8 +80,17 @@ class AihealueController extends BaseController {
 
 
         $errors = $aihealue->errors();
+        
         if (count($errors) == 0) {
             $aihealue->muokkaa();
+            $aihealue->poistaAlueenRyhmat();
+            if (array_key_exists('ryhmat', $lomakkeenTiedot)) {
+                $ryhmat = $lomakkeenTiedot['ryhmat'];
+
+                for ($i = 0; $i < count($ryhmat); $i++) {
+                    $aihealue->lisaaAlueelleRyhma($ryhmat[$i]);
+                }
+            }
             Redirect::to('/aihealue/' . $aihealue->id);
         } else {
             $kayttajaryhmat = Kayttajaryhma::haeKaikki();

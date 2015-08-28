@@ -20,7 +20,12 @@
         <label>Kuvaus</label>
         <input name="kuvaus" value="{{aihealue.kuvaus}}" class="form-control" type="text">
     </div>
-
+    <div class="form-group">
+        <label>Valitse ryhmät jotka näkevät alueen. Jos et valitse mitään alue on julkinen</label><br>
+        {% for ryhma in kayttajaryhmat %}
+        <input name="ryhmat[]" value="{{ryhma.id}}" class="checkbox-inline " type="checkbox" > {{ryhma.kuvaus}}<br>
+        {% endfor %}
+    </div>
 
     <button type="submit" class="btn btn-primary">Tallenna</button>
     <a href="{{base_path}}"<button type="submit" class="btn btn-danger">Peruuta</button></a>

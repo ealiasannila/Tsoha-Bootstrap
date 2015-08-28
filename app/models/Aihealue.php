@@ -145,6 +145,13 @@ class Aihealue extends BaseModel {
             'ryhma' => $ryhmaid
         ));
     }
+    
+     public function poistaAlueenRyhmat() {
+        $kysely = DB::connection()->prepare('DELETE FROM AihealueKuuluu WHERE aihealue = :aihealue');
+        $kysely->execute(array(
+            'aihealue' => $this->id
+        ));
+    }
 
     public function muokkaa() {
         $kysely = DB::connection()->prepare('UPDATE Aihealue set kuvaus = :kuvaus, otsikko = :otsikko WHERE id = :id');
