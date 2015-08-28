@@ -3,6 +3,16 @@
 <h2>Kayttajaryhmien hallinta</h2>
 
 <div>
+    {% if virheet %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for virhe in virheet %}
+            <li>{{virhe}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
     <form method="post" action="{{base_path}}/ryhmahallinta/uusiryhma">
         <input type="text" name="ryhma">
         <button type="submit" class="btn btn-primary" >Luo ryhma</button>
@@ -13,7 +23,7 @@
         <li><a href="{{base_path}}/kayttajaryhma/{{ryhma.id}}"> {{ryhma.kuvaus}}</a></li>
 
         <form method="post" action="{{base_path}}/ryhmahallinta/poistaryhma">
-            
+
             <button type="submit" name="ryhma" value="{{ryhma.id}}" class="btn btn-danger btn-xs">Poista</button>
         </form>
 

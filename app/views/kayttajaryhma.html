@@ -3,6 +3,18 @@
 <h2>{{ryhma.kuvaus}}</h2>
 
 <div>
+    {% if virheet %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for virhe in virheet %}
+            <li>{{virhe}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% if user_logged_in.kuuluuRyhmaan(1) %}
+
+
     <form method="post" action="{{base_path}}/kayttajaryhma/{{ryhma.id}}/lisaajasen">
         <select class="form-control" name="kayttaja">
 
@@ -12,15 +24,17 @@
         </select>
         <button type="submit" class="btn btn-primary" >Lisää jäsen</button>
     </form>
+    {% endif %}
     <p><strong>Jäsenet</strong></p>
     <ul>
         {% for jasen in ryhma.haeJasenet() %}
         <li><a href="{{base_path}}/kayttaja/{{jasen.id}}"> {{jasen.kayttajatunnus}}</a></li>
 
+        {% if user_logged_in.kuuluuRyhmaan(1) %}
         <form method="post" action="{{base_path}}/kayttajaryhma/{{ryhma.id}}/poistajasen">
-            
             <button type="submit" name="kayttaja" value="{{jasen.id}}" class="btn btn-danger btn-xs">Poista</button>
         </form>
+        {% endif %}
 
         {% endfor %}
     </ul>

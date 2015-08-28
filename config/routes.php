@@ -3,6 +3,9 @@
 function tarkistaKirjautuminen(){
     BaseController::check_logged_in();
 }
+function tarkistaYllapito(){
+    BaseController::check_yllapito();
+}
 
 
 $routes->post('/haku', function() {
@@ -64,21 +67,21 @@ $routes->get('/kayttaja/:id', function($id) {
 $routes->get('/kayttajaryhma/:id', function($id) {
     KayttajaRyhmaController::nayta($id);
 });
-$routes->post('/kayttajaryhma/:ryhmaid/lisaajasen/', function($ryhmaid) {
+$routes->post('/kayttajaryhma/:ryhmaid/lisaajasen/', 'tarkistaKirjautuminen', function($ryhmaid) {
     KayttajaRyhmaController::lisaaJasen($ryhmaid);
 });
-$routes->post('/kayttajaryhma/:ryhmaid/poistajasen/', function($ryhmaid) {
+$routes->post('/kayttajaryhma/:ryhmaid/poistajasen/', 'tarkistaKirjautuminen', function($ryhmaid) {
     KayttajaRyhmaController::poistaJasen($ryhmaid);
 });
 
 
-$routes->get('/ryhmahallinta', function() {
+$routes->get('/ryhmahallinta', 'tarkistaKirjautuminen', function() {
     KayttajaRyhmaController::listaa();
 });
-$routes->post('/ryhmahallinta/uusiryhma', function() {
+$routes->post('/ryhmahallinta/uusiryhma', 'tarkistaKirjautuminen', function() {
     KayttajaRyhmaController::lisaaRyhma();
 });
-$routes->post('/ryhmahallinta/poistaryhma', function() {
+$routes->post('/ryhmahallinta/poistaryhma', 'tarkistaKirjautuminen', function() {
     KayttajaRyhmaController::poistaRyhma();
 });
 

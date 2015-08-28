@@ -28,9 +28,6 @@ INSERT INTO Vastaus (otsikko, teksti, aihe, laatija) VALUES ('Trollit trolaa', '
 INSERT INTO Vastaus (otsikko, teksti, aihe, laatija) VALUES ('Maailmanvalloitus', 'evil plans for world domination', 4,3);
 INSERT INTO Vastaus (otsikko, teksti, aihe, laatija) VALUES ('Maailmanvalloitus', 'ei tuu toimii...', 4,2);
 
-
-INSERT INTO Luettu (kayttaja, vastaus) VALUES (1,1);
-
 INSERT INTO KayttajaKuuluu (kayttaja, KayttajaRyhma) VALUES (1,1);
 INSERT INTO KayttajaKuuluu (kayttaja, KayttajaRyhma) VALUES (2,2);
 INSERT INTO KayttajaKuuluu (kayttaja, KayttajaRyhma) VALUES (3,2);

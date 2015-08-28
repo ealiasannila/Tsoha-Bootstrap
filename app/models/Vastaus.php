@@ -26,15 +26,15 @@ class Vastaus extends BaseModel {
     }
 
     public static function haeHakusanalla($hakusanat) {
-        
+
         $vastaukset = array();
         $kaikki = self::haeKaikki();
         for ($i = 0; $i < count($hakusanat); $i++) {
-            if(empty($hakusanat[$i])){
+            if (empty($hakusanat[$i])) {
                 return;
             }
             for ($j = 0; $j < count($kaikki); $j++) {
-                if (strpos($kaikki[$j]->teksti,$hakusanat[$i]) !== false) {
+                if (strpos($kaikki[$j]->teksti, $hakusanat[$i]) !== false) {
                     $vastaukset[] = $kaikki[$j];
                 }
             }
@@ -197,6 +197,7 @@ class Vastaus extends BaseModel {
         $kysely = DB::connection()->prepare('DELETE FROM Vastaus WHERE id = :id');
         $kysely->execute(array(
             'id' => $this->id));
+        
     }
 
 }

@@ -17,6 +17,7 @@ class Kayttajaryhma extends BaseModel {
 
     public function __construct($attribuutit) {
         parent::__construct($attribuutit);
+        $this->validators = array('validoi_ryhma');
     }
 
     public function lisaaRyhma() {
@@ -153,6 +154,34 @@ class Kayttajaryhma extends BaseModel {
         $rivi = $kysely->fetch();
 
         $this->id = $rivi['id'];
+    }
+
+    public function validoi_ryhma() {
+        $errors = array();
+
+        $kysely = DB::connection()->prepare('SELECT * FROM Kayttajaryhma WHERE kuvaus = :kuvaus LIMIT 1');
+        $kysely->execute(array(
+            'kuvaus' => $this->kuvaus));
+        $rivi = $kysely->fetch();
+        if ($rivi) {
+            $errors[] = 'käyttäjäryhmä on jo käytössä';
+        } else {
+            if (!$this->validate_strlength($this->kuvaus, 1, 50)) {
+                $errors[] = 'Ryhmän nimen tulee olla välilä 1-50';
+            }
+        }
+        return $errors;
+    }
+
+    public function validoi_uusiJasen($id) {
+        $errors = array();
+        $jasen = Kayttaja::haeYksi($id);
+        echo 'ei vielä';
+        if ($jasen->kuuluuRyhmaan($this->id)) {
+            echo 'eroro';
+            $errors[] = 'käyttäjä kuuluu jo ryhmään';
+        }
+        return $errors;
     }
 
 }

@@ -14,7 +14,7 @@
 class AihealueController extends BaseController {
 
     public static function listaa() {
-        $aihealueet = Aihealue::haeKaikki(); 
+        $aihealueet = Aihealue::haeKaikki();
         View::make('foorumi.html', array('aihealueet' => $aihealueet));
     }
 
@@ -48,10 +48,12 @@ class AihealueController extends BaseController {
         if (count($virheet) == 0) {
             $aihealue->lisaa();
 
-            $ryhmat = $lomakkeenTiedot['ryhmat'];
+            if (array_key_exists('ryhmat', $lomakkeenTiedot)) {
+                $ryhmat = $lomakkeenTiedot['ryhmat'];
 
-            for ($i = 0; $i < count($ryhmat); $i++) {
-                $aihealue->lisaaAlueelleRyhma($ryhmat[$i]);
+                for ($i = 0; $i < count($ryhmat); $i++) {
+                    $aihealue->lisaaAlueelleRyhma($ryhmat[$i]);
+                }
             }
             Redirect::to('/aihealue/' . $aihealue->id);
         }

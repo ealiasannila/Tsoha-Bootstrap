@@ -23,8 +23,7 @@ class VastausController extends BaseController {
     }
 
     private static function tarkistaKayttaja($viestiId) {
-        if (self::get_user_logged_in()->id != Vastaus::haeYksi($viestiId)->laatija) {
-
+        if (self::get_user_logged_in()->id != Vastaus::haeYksi($viestiId)->laatija && !self::get_user_logged_in()->kuuluuRyhmaan(1)) {
             Redirect::to('/aihe/' . Vastaus::haeYksi($viestiId)->aihe);
         }
     }
@@ -73,7 +72,8 @@ class VastausController extends BaseController {
 
         $aihe = Aihe::haeYksi($id);
 
-        View::make('uusiVastaus.html', array('aihe' => $aihe));
+        $vastaukset = array_reverse($aihe->vastaukset());
+        View::make('uusiVastaus.html', array('aihe' => $aihe, 'vastaukset' => $vastaukset));
     }
 
     public static function lisaaVastaus($aiheId) {

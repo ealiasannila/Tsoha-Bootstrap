@@ -11,7 +11,7 @@
 
         {% for vastaus in vastaukset %}
         <tr>
-            <td><a href="{{base_path}}/kayttaja/{{vastaus.laatija}}">{{vastaus.laatijanNimi()}}</a><br>{{vastaus.otsikko}}</td>
+            <td><a href="{{base_path}}/kayttaja/{{vastaus.laatija}}">{{vastaus.laatijanNimi()}}</a><br><a href="{{base_path}}/aihe/{{vastaus.aihe}}">{{vastaus.otsikko}}</a></td>
             <td>{{vastaus.teksti}}<br>
                  {% if user_logged_in.id == vastaus.laatija %}
                 <a href="{{base_path}}/vastaus/{{vastaus.id}}/muokkaa"><button class="btn btn-default btn-xs">Muokkaa</button></a>

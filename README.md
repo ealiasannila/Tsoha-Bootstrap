@@ -31,12 +31,3 @@ Sovelluksen eri osiin pääsee seuraamalla foorumin linkkejä. Vastauksia voi my
 [Keskustelufoorumi](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Keskustelufoorumi.html) 
 
 
-
-##Todo:
-
-* vastausta lisättäessä vastaukset uusimmasta vanhimpaan
-* ylläpito voi muokata viestejä
-* käyttäjäryhmien hallinan sallimenen vain ylläpidolle
-* refaktorointia
-* näkymien hiontaa
-* hakutuloksiin linkki aiheeseen

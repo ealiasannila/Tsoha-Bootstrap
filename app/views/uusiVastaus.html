@@ -36,7 +36,7 @@
             <td>Lahetetty</td>
 
         </tr>
-        {% for vastaus in aihe.vastaukset() %}
+        {% for vastaus in vastaukset %}
         <tr>
             <td><a href="{{base_path}}/kayttaja/{{vastaus.laatija}}">{{vastaus.laatijanNimi}}</a></td>
             <td>{{vastaus.teksti}}</td>
